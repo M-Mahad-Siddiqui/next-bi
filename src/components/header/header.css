@@ -34,3 +34,28 @@
     font-size    : max(1vw,30px);
     border-radius: 50px;
 }
+
+@media (max-width: 1050px) {
+    .header{
+        height: 38vw;
+    }
+    .header-contents{
+        max-width: 45%;
+    }
+}
+
+
+@media (max-width: 750px) {
+  
+    .header-contents{
+        max-width: 55%;
+    }
+    .header-contents p{
+        display: none;
+    }
+    .header-contents button{
+        padding  : 2vw 4vw;
+        font-size: 1.5vw;
+        margin: 10px;
+    }
+}
