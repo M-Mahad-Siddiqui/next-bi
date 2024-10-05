@@ -17,7 +17,7 @@ function App() {
     <>
       {showLogin && <LoginPopUp setShowLogin = {setShowLogin} />}
       <div className="app">
-        <Navbar/>
+        <Navbar setShowLogin = {setShowLogin} />
         <Routes>
           <Route path = "/" element     = {<Home />} />
           <Route path = "/cart" element = {<Cart />} />
