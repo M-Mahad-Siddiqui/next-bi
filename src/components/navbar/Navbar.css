@@ -51,9 +51,11 @@
     min-width       : 10px;
     min-height      : 10px;
     background-color: tomato;
-    border-radius   : 5px;
+    border-radius   : 100px;
     top             : -8px;
     right           : -8px;
+    color           : white;
+    padding         : 2px;
 }
 
   /* Media Query */

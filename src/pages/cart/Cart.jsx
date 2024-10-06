@@ -23,8 +23,8 @@ export default function Cart() {
           if (cartItems[food._id] > 0) {
             return (
               <>
-                <div className="cart-item cart-items-item" key={food.id}>
-                  <img src={food.image} alt={food.name} />
+                <div className = "cart-items-title cart-items-item" key = {food.id}>
+                <img src       = {food.image} alt                       = {food.name} />
                   <p>{food.name}</p>
                   <p>${food.price}</p>
                   <p>{cartItems[food._id]}</p>

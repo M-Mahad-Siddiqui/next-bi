@@ -6,20 +6,33 @@
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
     align-items          : center;
     color                : gray;
-    font-size: max(1vw ,12px);
+    font-size: max(1.7vw ,18px);
 }
 .cart-items-item{
-    margin: 10px 0px;
-    color : black;
+    margin   : 10px 0px;
+    color    : black;
+    font-size: max(1.1vw ,16px);
 }
 .cart-items-item img{
-    width: 50px;
+    width        : 80px;
+    border-radius: 20px;
+    margin-right: 2px;
 }
 hr{
     border: 0.5px solid gray;
 }
 .cross{
-    cursor: pointer;
+    cursor          : pointer;
+    padding         : 7px;
+    width           : min-content;
+    border          : 1px solid red;
+    color           : red;
+    background-color: white;
+    font-weight: 600;
+}
+.cross:hover{
+    background-color: red;
+    color           : white;
 }
 .cart-bottom{
     margin-top     : 80px;
