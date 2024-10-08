@@ -56,6 +56,7 @@ import { useFireContext } from '../../context/FireContext';
 import { useStoreContext } from '../../context/StoreContext';
 import './Navbar.css';
 
+
 function Navbar({ setShowLogin }) {
     const { isLogin, SignOut } = useFireContext();
     const [menu, setMenu] = useState('home');
@@ -69,9 +70,10 @@ function Navbar({ setShowLogin }) {
     };
 
     return (
-        <div className='navbar'>
-            <Link to='/'>
-                <img src={assets.logo} alt='logo' className='logo' />
+        <div  className = 'navbar'>
+        <Link to        = '/'>
+        {/* <img  src       = {assets.logo} alt = 'logo' className = 'logo' /> */}
+        <img src = {assets.logo2} alt = 'logo' className = 'logo' />
             </Link>
             <ul className='navbar-menu'>
                 <Link
@@ -103,11 +105,11 @@ function Navbar({ setShowLogin }) {
                     Contact Us
                 </a>
             </ul>
-            <div className='navbar-right'>
-                <img src={assets.search_icon} alt='search' />
-                <div className='navbar-search-icon'>
-                    <Link to='/cart'>
-                        <img src={assets.basket_icon} alt='' />
+            <div  className = 'navbar-right'>
+            <img  src       = {assets.search_icon} alt = 'search' />
+            <div  className = 'navbar-search-icon'>
+            <Link to        = '/cart'>
+            <img  src       = {assets.basket_icon} alt = '' />
                     </Link>
                     {/* Cart Badge */}
                     {getTotalQuantity() > 0 && <div className='dot'>{getTotalQuantity()}</div>}

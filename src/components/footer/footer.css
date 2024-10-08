@@ -27,6 +27,9 @@
 	align-items: start;
 	gap: 20px;
 }
+#mahad{
+	width: 250px;
+}
 .footer-left li,
 .footer-center li,
 .footer-right li {

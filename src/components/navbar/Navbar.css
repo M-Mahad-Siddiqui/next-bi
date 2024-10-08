@@ -1,12 +1,26 @@
 .navbar{
-    padding        : 20px 0px;
+    padding        : 5px 0px;
     display        : flex;
     justify-content: space-between;
-    align-items: center;
+    align-items    : center;
+      /* background: rgb(208, 194, 194); */
+    border-bottom: 1px solid #eb6e34;
 }
-.navbar .logo{
-    width: 150px;
-}
+
+    .navbar .logo {
+        width: 120px;
+        box-shadow: 0px 0px 10px #eb6e34;
+    }
+    .navbar .logo:hover{
+        filter: drop-shadow(0px 0px 10px #c4bab5);
+        scale : 1.05;
+        transition: 0.3s ease-in-out;
+    }
+
+/* .navbar .logo {
+    width: 120px;
+    filter: drop-shadow(0px 0px 10px #dceb34);
+} */
 
 .navbar-menu{
     display   : flex;
