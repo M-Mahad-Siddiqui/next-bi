@@ -1,6 +1,6 @@
-import './header.css';
 import de from './de.jpg';
 import food from './food.jpg';
+import './header.css';
 import img from './header_img.png';
 import img1 from './img1.jpg';
 import img2 from './img2.jpg';
@@ -19,7 +19,9 @@ function Header() {
         margin        : '30px auto',
         background    : ` url(${randomImage}) no-repeat`,
         backgroundSize: 'cover',
-        position      : 'relative'
+        width         : "80vw",
+        position      : 'relative',
+        borderRadius  : '15px'
 
     };
 

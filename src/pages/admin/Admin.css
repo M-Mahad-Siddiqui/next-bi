@@ -64,10 +64,10 @@
 }
 
 .body {
-    height       : 85vh;
     padding      : 20px;
     border-radius: 4px;
-    width        : calc(100% - 10px);  /* Subtract sidebar width from full width */
+    width        : 100%;
+    margin: 0 auto;
     margin-left  : 150px;               /* Offset for sidebar */
     border       : 3px solid gray;
     margin-top: 30px;
