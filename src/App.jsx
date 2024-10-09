@@ -7,6 +7,10 @@ import Admin from "./pages/admin/Admin";
 import Cart from "./pages/cart/Cart";
 import Home from "./pages/home/Home.jsx";
 import PlaceOrder from "./pages/placeOrder/PlaceOrder";
+import AddProduct from './components/admin/AddProduct/AddProduct.jsx';
+import ViewOrder from './components/admin/ViewOrder/ViewOrder.jsx';
+import ViewProducts from './components/admin/ViewProducts/ViewProducts.jsx';
+import ViewUsers from './components/admin/ViewUsers/ViewUsers.jsx';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -23,10 +27,14 @@ function App() {
         {/* Conditionally render Navbar */}
         {!isAdminRoute && <Navbar setShowLogin={setShowLogin} />}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/placeOrder" element={<PlaceOrder />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path = "/" element                   = {<Home />} />
+          <Route path = "/cart" element               = {<Cart />} />
+          <Route path = "/placeOrder" element         = {<PlaceOrder />} />
+          <Route path = "/admin" element              = {<Admin />} />
+          <Route path = "/admin/AddProduct" element   = {<AddProduct />} />
+          <Route path = "/admin/ViewOrder" element    = {<ViewOrder />} />
+          <Route path = "/admin/ViewProducts" element = {<ViewProducts />} />
+          <Route path = "/admin/ViewUsers" element    = {<ViewUsers />} />
         </Routes>
       </div>
       {/* Conditionally render Footer */}

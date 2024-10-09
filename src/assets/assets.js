@@ -1,5 +1,6 @@
 import basket_icon from './basket_icon.png'
 import admin from './admin.png'
+import back from './back.png'
 import logo from './logo.png'
 import logo1 from './logo1.png'
 import logo2 from './logo2.png'
@@ -66,6 +67,7 @@ import twitter_icon from './twitter_icon.png'
 
 export const assets = {
     admin,
+    back,
     logo,
     logo1,
     logo2,

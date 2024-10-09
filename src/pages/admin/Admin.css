@@ -1,3 +1,75 @@
-h1{
-    color :blue;
+.header {
+    background-color: rgb(187, 86, 14);
+    margin-left     : 0;
+    margin-right    : 0;
+    text-align      : center;
+    padding         : 20px;
+    border-radius   : 4px;
+    font-style      : uppercase;
+    position        : fixed;   /* Keep header fixed */
+    z-index         : 1;
+    top             : 4px;       /* Stick to the top */
+    left            : 0;
+    width           : 99vw;   /* Full viewport width */
+    color           : white;
+    font-size       : large;
+    margin-bottom   : 10px;
+}
+.back{
+    width   : 40px;
+    position: absolute;
+    left    : 2%;
+    cursor  : pointer;
+}
+.back:hover {
+    scale: 1.1;
+    transition: 0.3s;
+}
+.main {
+    display         : flex;
+    margin-top      : 70px;   /* Space below the fixed header */
+}
+
+.sidebar {
+    background-color: rgb(76, 79, 72);
+    height          : 85vh;
+    margin          : 0px 5px;
+    padding         : 20px;
+    border-radius   : 4px;
+    width           : 300px;
+    color           : white;
+    display         : flex;
+    flex-direction  : column;
+    font-size       : 25px;
+    justify-content : space-around;
+    position        : fixed;            /* Keep sidebar fixed */
+    z-index         : 2;
+    top             : 100px;            /* Stick below the header */
+    left            : 0;
+}
+
+.sidebar span {
+    padding         : 10px;
+    background-color: rgb(56, 59, 52);
+    cursor          : pointer;
+    box-shadow      : 0px 0px 11px rgba(237, 60, 6, 0.9);
+    border-radius   : 4px;
+}
+
+.sidebar span:hover {
+    background-color: rgb(45, 53, 35);
+    font-weight     : 500;
+    scale           : 1.05;
+    transition      : 0.3s;
+}
+
+.body {
+    height       : 85vh;
+    padding      : 20px;
+    border-radius: 4px;
+    width        : calc(100% - 10px);  /* Subtract sidebar width from full width */
+    margin-left  : 150px;               /* Offset for sidebar */
+    border       : 3px solid gray;
+    margin-top: 30px;
+    overflow-y   : auto;                /* Enable scrolling if content exceeds height */
 }

@@ -1,0 +1,75 @@
+.add-product-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.add-product-container h1{
+    text-align: center;
+    margin: 20px 0px;
+}
+.add-product-form {
+    display       : flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight     : bold;
+    /* background-color: #218838; */
+    padding           :0px 10px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding      : 10px;
+    border       : 1px solid #ccc;
+    border-radius: 4px;
+    font-size    : 16px;
+    width        : 300px;
+    align-content: right;
+    
+}
+.form-group input,
+.form-group textarea :hover{
+    outline: tomato;
+}
+
+.form-group input[type="file"] {
+    border: none; /* Remove border for file input */
+}
+
+.submit-button {
+    padding: 10px;
+    background-color: rgb(187, 86, 14);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: rgb(150, 70, 10);
+}
+
+button[type="button"] {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #218838;
+}
