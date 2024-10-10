@@ -1,75 +1,68 @@
-  /* Global Reset */
-* {
+  /* Scoped to .adminBody */
+.adminBody * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body, html {
+.adminBody {
   font-family: Arial, sans-serif;
   height: 100%;
   overflow: hidden;
 }
 
-.adminBody {
-  display       : flex;
-  flex-direction: column;
-  height        : 100vh;
-  width         : 100vw;
-  margin-left: -180px;   
-}
-
 /* Header */
-.header {
-  background-color: rgb(187, 86, 14);
-  width           : 99%;
-  position        : fixed;
-  top             : 1px;
-  left            : 5px;
-  height          : 60px;
-  display         : flex;
-  align-items     : center;
-  justify-content : center;            /* Centering the heading */
-  color           : white;
-  z-index         : 1000;
-  border-radius   : 4px;
+.adminBody .header {
+  background-color: tomato;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1000;
 }
 
-.header h1 {
-  font-size: 20px;
+.adminBody .header h1 {
+  font-size     : 20px;
   text-transform: uppercase;
+  color         : white  ;
 }
 
-.back {
+.adminBody .back {
   width: 40px;
   position: absolute;
-  left: 20px;
-  cursor: pointer;
+  left: 60px; /* Adjusted position to avoid overlap with hamburger menu */
   top: 10px;
+  cursor: pointer;
 }
 
-.back:hover {
+.adminBody .back:hover {
   scale: 1.1;
   transition: 0.3s;
 }
 
-.hamburger {
+.adminBody .hamburger {
   display: none;
   position: absolute;
   left: 20px;
-  font-size: 30px; /* Larger hamburger icon */
+  top: 10px;
+  font-size: 30px;
   cursor: pointer;
   z-index: 1001;
 }
 
 /* Main Layout */
-.main {
-  display: flex;
+.adminBody .main {
+  display   : flex;
   margin-top: 60px;
-  height: calc(100vh - 60px); /* Remaining height after header */
+  height    : calc(100vh - 60px);
 }
 
-.sidebar {
+.adminBody .sidebar {
   background-color: rgb(76, 79, 72);
   width: 250px;
   padding: 20px;
@@ -84,7 +77,7 @@ body, html {
   transition: all 0.3s ease;
 }
 
-.sidebar span {
+.adminBody .sidebar span {
   padding: 10px;
   margin-bottom: 10px;
   background-color: rgb(56, 59, 52);
@@ -93,13 +86,13 @@ body, html {
   transition: background-color 0.3s, scale 0.3s;
 }
 
-.sidebar span:hover {
+.adminBody .sidebar span:hover {
   background-color: rgb(45, 53, 35);
   scale: 1.05;
 }
 
 /* Main content */
-.body {
+.adminBody .body {
   margin-left: 250px;
   padding: 20px;
   width: calc(100% - 250px);
@@ -107,41 +100,47 @@ body, html {
   background-color: #f4f4f4;
 }
 
-.content {
-  border: 2px solid gray;
-  border-radius: 8px;
-  padding: 20px;
+.adminBody .content {
+  border-radius   : 8px;
+  padding         : 20px;
   background-color: white;
-  min-height: calc(100vh - 100px);
+  min-height      : calc(100vh - 100px);
+  box-shadow      : 0px 0px 10px rgba(0, 0, 0, 0.4);
+
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .sidebar {
+  .adminBody .sidebar {
     width: 60px;
     padding: 10px;
   }
 
-  .sidebar span {
+  .adminBody .sidebar span {
     display: none; /* Hide text, keep icons */
   }
 
-  .body {
+  .adminBody .body {
     margin-left: 60px;
     width: calc(100% - 60px);
   }
 
-  .header h1 {
+  .adminBody .header h1 {
     font-size: 18px;
   }
 
-  .hamburger {
+  .adminBody .hamburger {
     display: block;
+    left: 20px;
     position: absolute;
     top: 15px;
   }
 
-  .sidebar.show {
+  .adminBody .back {
+    left: 60px; /* Adjust position for back arrow to avoid overlap with hamburger */
+  }
+
+  .adminBody .sidebar.show {
     width: 100%; /* Full-width sidebar */
     height: calc(100vh - 60px);
     position: absolute;
@@ -152,37 +151,33 @@ body, html {
     transition: all 0.3s ease;
   }
 
-  .sidebar.show span {
+  .adminBody .sidebar.show span {
     display: block; /* Show menu items on sidebar open */
     padding: 20px;
   }
 
-  .body {
+  .adminBody .body {
     margin-left: 0;
     width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .sidebar {
+  .adminBody .sidebar {
     left: -250px;
     transition: all 0.3s ease;
   }
 
-  .sidebar.show {
+  .adminBody .sidebar.show {
     left: 0;
   }
 
-  .body {
+  .adminBody .body {
     margin-left: 0;
     width: 100%;
   }
 
-  .header h1 {
+  .adminBody .header h1 {
     font-size: 16px;
-  }
-  .adminBody{
-    margin-top: 85px;
-    margin-left: -40px;
   }
 }

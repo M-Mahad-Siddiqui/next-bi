@@ -245,14 +245,14 @@ export const FireProvider = ({ children }) => {
     // };
 
 
-    const addUser = (data) => addDataToCollection("users", data);
+    const addUserInfo = (data) => addDataToCollection("usersDetails", data);
     const addOrder = (data) => addDataToCollection("orders", data);
     const addCart = (data) => addDataToCollection("cart", data);
 
-    const getUsers = () => getDataFromCollection("users");
+    const getUserInfo = () => getDataFromCollection("usersDetails");
     const getProducts = () => getDataFromCollection("products");
-    const getOrders = () => getDataFromCollection("orders");
-    const getCart = () => getDataFromCollection("cart");
+    const getOrders   = () => getDataFromCollection("orders");
+    const getCart     = () => getDataFromCollection("cart");
 
     const fireContextValue = {
         isLogin,
@@ -263,12 +263,12 @@ export const FireProvider = ({ children }) => {
         SignOut,
         deleteProduct,
         updateProduct,
-        getUsers,
+        getUserInfo,
         getProducts,
         getOrders,
         getCart,
         addProducts,
-        addUser,
+        addUserInfo,
         addOrder,
         addCart
     };

@@ -23,6 +23,13 @@ function Admin() {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const handleSelectView = (view) => {
+    setSelect(view);
+    if (window.innerWidth <= 768) {
+      setSidebarOpen(false); // Auto-close sidebar after selecting an option on small screens
+    }
+  };
+
   return (
     <div className='adminBody'>
       <div className='header'>
@@ -34,10 +41,10 @@ function Admin() {
       </div>
       <div className='main'>
         <div className={`sidebar ${sidebarOpen ? 'show' : ''}`}>
-          <span onClick={() => setSelect(VIEWS.ADD_PRODUCT)}>Add Product</span>
-          <span onClick={() => setSelect(VIEWS.VIEW_ORDER)}>View Orders</span>
-          <span onClick={() => setSelect(VIEWS.VIEW_USERS)}>View Users</span>
-          <span onClick={() => setSelect(VIEWS.VIEW_PRODUCTS)}>View Products</span>
+          <span onClick={() => handleSelectView(VIEWS.ADD_PRODUCT)}>Add Product</span>
+          <span onClick={() => handleSelectView(VIEWS.VIEW_ORDER)}>View Orders</span>
+          <span onClick={() => handleSelectView(VIEWS.VIEW_USERS)}>View Users</span>
+          <span onClick={() => handleSelectView(VIEWS.VIEW_PRODUCTS)}>View Products</span>
         </div>
         <div className='body'>
           <div className='content'>
