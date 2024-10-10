@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFireContext } from "../../../context/FireContext";
-import "./ViewUsers.css";
+import "./viewUser.css";
 
 function ViewUsers() {
 	const { getUserInfo, loading } = useFireContext();
