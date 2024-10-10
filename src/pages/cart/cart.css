@@ -9,9 +9,11 @@
     font-size: max(1.7vw ,18px);
 }
 .cart-items-item{
-    margin   : 10px 0px;
-    color    : black;
-    font-size: max(1.1vw ,16px);
+    margin          : 10px 0px;
+    color           : black;
+    font-size       : max(1.1vw ,16px);
+    background-color: rgb(231, 185, 170);
+    border-radius: 8px;
 }
 .cart-items-item img{
     width        : 80px;

@@ -1,70 +1,73 @@
-  ViewProducts.css
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2em;
-  color: #333;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
+.view-products {
   margin-top: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
 }
 
-thead {
-  background-color: #f8f8f8;
+.products-heading {
+  margin: 20px 0;
+  font-size: max(2vw, 20px);
+  text-align: center;
 }
 
-th, td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.product-title {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  color: gray;
+  font-size: max(1.1vw, 15px);
+  font-weight: 700;
 }
 
-th {
-  font-weight: bold;
-  color: #555;
-}
-
-tbody tr:hover {
-  background-color: #f1f1f1;
+.product-row {
+  display              : grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items          : center;
+  margin               : 10px 0;
+  color                : black;
+  font-size            : max(0.9vw, 12px);
+  gap                  : 2px;
+  border               : 2px solid white;
+  margin-top           : 10px;
+  background-color     : rgb(247, 230, 132);
+  border-radius        : 4px;
 }
 
 #product-image {
-  max-width: 100px;
+  width: 100%;
   height: auto;
+  border-radius: 4px;
 }
 
-@media (max-width: 768px) {
-  th, td {
-    font-size: 14px;
-    padding: 8px;
-  }
-  
-  #product-image {
-    max-width: 80px;
+.action-icons {
+  cursor      : pointer;
+  margin-right: 10px;
+  display     : inline-block;
+  font-size: larger;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .product-title, .product-row {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.5em;
+@media (max-width: 900px) {
+  .product-title, .product-row {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  table {
-    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .product-title, .product-row {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  #product-image {
-    max-width: 60px;
+
+  .products-heading {
+    font-size: max(4vw, 18px);
+  }
+
+  .product-title p, .product-row p {
+    font-size: max(2vw, 14px);
   }
 }
