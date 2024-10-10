@@ -1,75 +1,188 @@
+  /* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: Arial, sans-serif;
+  height: 100%;
+  overflow: hidden;
+}
+
+.adminBody {
+  display       : flex;
+  flex-direction: column;
+  height        : 100vh;
+  width         : 100vw;
+  margin-left: -180px;   
+}
+
+/* Header */
 .header {
-    background-color: rgb(187, 86, 14);
-    margin-left     : 0;
-    margin-right    : 0;
-    text-align      : center;
-    padding         : 20px;
-    border-radius   : 4px;
-    font-style      : uppercase;
-    position        : fixed;   /* Keep header fixed */
-    z-index         : 1;
-    top             : 4px;       /* Stick to the top */
-    left            : 0;
-    width           : 99vw;   /* Full viewport width */
-    color           : white;
-    font-size       : large;
-    margin-bottom   : 10px;
+  background-color: rgb(187, 86, 14);
+  width           : 99%;
+  position        : fixed;
+  top             : 1px;
+  left            : 5px;
+  height          : 60px;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;            /* Centering the heading */
+  color           : white;
+  z-index         : 1000;
+  border-radius   : 4px;
 }
-.back{
-    width   : 40px;
-    position: absolute;
-    left    : 2%;
-    cursor  : pointer;
+
+.header h1 {
+  font-size: 20px;
+  text-transform: uppercase;
 }
+
+.back {
+  width: 40px;
+  position: absolute;
+  left: 20px;
+  cursor: pointer;
+  top: 10px;
+}
+
 .back:hover {
-    scale: 1.1;
-    transition: 0.3s;
+  scale: 1.1;
+  transition: 0.3s;
 }
+
+.hamburger {
+  display: none;
+  position: absolute;
+  left: 20px;
+  font-size: 30px; /* Larger hamburger icon */
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Main Layout */
 .main {
-    display         : flex;
-    margin-top      : 70px;   /* Space below the fixed header */
+  display: flex;
+  margin-top: 60px;
+  height: calc(100vh - 60px); /* Remaining height after header */
 }
 
 .sidebar {
-    background-color: rgb(76, 79, 72);
-    height          : 85vh;
-    margin          : 0px 5px;
-    padding         : 20px;
-    border-radius   : 4px;
-    width           : 300px;
-    color           : white;
-    display         : flex;
-    flex-direction  : column;
-    font-size       : 25px;
-    justify-content : space-around;
-    position        : fixed;            /* Keep sidebar fixed */
-    z-index         : 2;
-    top             : 100px;            /* Stick below the header */
-    left            : 0;
+  background-color: rgb(76, 79, 72);
+  width: 250px;
+  padding: 20px;
+  height: 100%;
+  color: white;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  transition: all 0.3s ease;
 }
 
 .sidebar span {
-    padding         : 10px;
-    background-color: rgb(56, 59, 52);
-    cursor          : pointer;
-    box-shadow      : 0px 0px 11px rgba(237, 60, 6, 0.9);
-    border-radius   : 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(56, 59, 52);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, scale 0.3s;
 }
 
 .sidebar span:hover {
-    background-color: rgb(45, 53, 35);
-    font-weight     : 500;
-    scale           : 1.05;
-    transition      : 0.3s;
+  background-color: rgb(45, 53, 35);
+  scale: 1.05;
 }
 
+/* Main content */
 .body {
-    padding      : 20px;
-    border-radius: 4px;
-    width        : 100%;
-    margin: 0 auto;
-    margin-left  : 150px;               /* Offset for sidebar */
-    border       : 3px solid gray;
-    margin-top: 30px;
-    overflow-y   : auto;                /* Enable scrolling if content exceeds height */
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px);
+  overflow-y: auto;
+  background-color: #f4f4f4;
+}
+
+.content {
+  border: 2px solid gray;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+  min-height: calc(100vh - 100px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+    padding: 10px;
+  }
+
+  .sidebar span {
+    display: none; /* Hide text, keep icons */
+  }
+
+  .body {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 15px;
+  }
+
+  .sidebar.show {
+    width: 100%; /* Full-width sidebar */
+    height: calc(100vh - 60px);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar.show span {
+    display: block; /* Show menu items on sidebar open */
+    padding: 20px;
+  }
+
+  .body {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    left: -250px;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar.show {
+    left: 0;
+  }
+
+  .body {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .header h1 {
+    font-size: 16px;
+  }
+  .adminBody{
+    margin-top: 85px;
+    margin-left: -40px;
+  }
 }
