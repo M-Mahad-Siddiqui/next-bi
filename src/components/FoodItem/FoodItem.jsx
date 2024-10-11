@@ -3,21 +3,21 @@
 // import './FoodItem.css';
 
 // function FoodItem({ item }) {
-//     const { _id, name, image, price, description } = item;
+//     const { id, name, image, price, description } = item;
 //     const { cartItems, removeFromCart, addToCart } = useStoreContext();
 
 //     // Increment item in the cart
 //     const handleIncrement = () => {
-//         addToCart(_id);
+//         addToCart(id);
 //         console.log(cartItems);
 //     };
 
 //     // Decrement item in the cart
 //     const handleDecrement = () => {
-//         removeFromCart(_id);
+//         removeFromCart(id);
 //     };
 
-//     const itemCount = cartItems[_id] || 0;  // Default to 0 if item is not in cart
+//     const itemCount = cartItems[id] || 0;  // Default to 0 if item is not in cart
 
 //     return (
 //         <div className='food-item'>
@@ -65,17 +65,17 @@ import { useStoreContext } from '../../context/StoreContext';
 import './FoodItem.css';
 
 function FoodItem({ item }) {
-    const { _id, name, image, price, description } = item;
+    const { id, name, image, price, description } = item;
     const { cartItems, removeFromCart, addToCart } = useStoreContext();
 
-    const itemCount = cartItems[_id] || 0; // Default to 0 if item is not in cart
+    const itemCount = cartItems[id] || 0; // Default to 0 if item is not in cart
 
     const handleIncrement = () => {
-        addToCart(_id);
+        addToCart(id);
     };
 
     const handleDecrement = () => {
-        removeFromCart(_id);
+        removeFromCart(id);
     };
 
     // useEffect(() => {
@@ -83,9 +83,9 @@ function FoodItem({ item }) {
     // }, [cartItems]); // Log cartItems whenever it changes
 
     return (
-        <div className='food-item'>
-            <div className='food-item-image-container'>
-                <img src={image} alt={name} className='food-item-image' />
+        <div className = 'food-item'>
+        <div className = 'food-item-image-container'>
+        <img src       = {image} alt = {name} className = 'food-item-image' />
                 {itemCount === 0 ? (
                     <img
                         className='add'

@@ -47,11 +47,11 @@ const removeFromCart = (itemId) => {
     let total = 0;
     for (const item in cartItems) {
         if (cartItems[item] > 0) {
-            const itemInfo = food_list.find((food) => Number(food._id) === Number(item));
+            const itemInfo = food_list.find((food) => Number(food.id) === Number(item));
             if (itemInfo) {
                 total += cartItems[item] * itemInfo.price;
             } else {
-                console.warn(`Item with _id ${item} not found in food_list`);
+                console.warn(`Item with id ${item} not found in food_list`);
             }
         }
     }

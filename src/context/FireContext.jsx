@@ -110,10 +110,9 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db, storage } from "../utiles/utils.js"; // Make sure storage is imported here
-
 export const FireContext = createContext(null);
 
 export const FireProvider = ({ children }) => {
@@ -245,12 +244,48 @@ export const FireProvider = ({ children }) => {
     // };
 
 
+
+    const getCategories = async () => {
+    try {
+        setLoading(true);
+        const querySnapshot = await getDocs(collection(db, "categories")); // Fetch from the "categories" collection
+        const categories = [];
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            categories.push({ name: data.name, image: data.image }); // Store name and image
+        });
+        return categories; // Return array of objects with name and image
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw error;
+    } finally {
+        setLoading(false);
+    }
+};
+
+const addCategory = async (data) => {
+    try {
+        setLoading(true);
+        if (data.image) {
+            data.image = await addImage(data.image); // Upload image and get URL
+        }
+        await addDataToCollection("categories", { name: data.name, image: data.image }); // Add name and image to "categories" collection
+    } catch (error) {
+        console.error("Error adding category:", error);
+        throw error;
+    } finally {
+        setLoading(false);
+    }
+};
+
+
     const addUserInfo = (data) => addDataToCollection("usersDetails", data);
-    const addOrder = (data) => addDataToCollection("orders", data);
+    const addOrder    = (data) => addDataToCollection("orders", data);
     const addCart = (data) => addDataToCollection("cart", data);
 
     const getUserInfo = () => getDataFromCollection("usersDetails");
-    const getProducts = () => getDataFromCollection("products");
+      // const getProducts = () => getDataFromCollection("products");
+    const getProducts = useCallback(() => getDataFromCollection("products"), []);
     const getOrders   = () => getDataFromCollection("orders");
     const getCart     = () => getDataFromCollection("cart");
 
@@ -261,6 +296,8 @@ export const FireProvider = ({ children }) => {
         SignUp,
         SignIn,
         SignOut,
+        addCategory,
+        getCategories,
         deleteProduct,
         updateProduct,
         getUserInfo,
