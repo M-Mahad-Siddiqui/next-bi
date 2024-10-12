@@ -176,42 +176,40 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { food_list } from '../../assets/assets';
-import { useStoreContext } from '../../context/StoreContext';
 import { useFireContext } from '../../context/FireContext';
+import { useStoreContext } from '../../context/StoreContext';
 import './cart.css';
 
 export default function Cart() {
   const { cartItems, removeFromCart, getTotalCartAmount } = useStoreContext();
-  const navigate = useNavigate();
-  const { addOrder, loading, getProducts } = useFireContext();
+  const navigate                                          = useNavigate();
+  const { loading, getProducts }                          = useFireContext();
   
-  const [combinedProducts, setCombinedProducts] = useState([]); // State to hold combined products
-  const [loadingProducts, setLoadingProducts] = useState(true); // State to manage loading products
+  const [combinedProducts, setCombinedProducts] = useState([]);    // State to hold combined products
+  const [loadingProducts, setLoadingProducts]   = useState(true);  // State to manage loading products
 
   const handleSubmit = () => {
-    const totalAmount = getTotalCartAmount() + 2;  // Delivery fee
-    addOrder(totalAmount, cartItems);
     navigate('/placeOrder');
   };
 
   useEffect(() => {
     const fetchProducts = async () => {
-      setLoadingProducts(true); // Set loading state
+      setLoadingProducts(true);  // Set loading state
       try {
-        const firestoreProducts = await getProducts(); // Fetch products from Firestore
-        const allProducts = [...firestoreProducts, ...food_list]; // Combine Firestore data with local data
-        setCombinedProducts(allProducts); // Update the combined products state
+        const               firestoreProducts = await getProducts();             // Fetch products from Firestore
+        const               allProducts = [...firestoreProducts, ...food_list];  // Combine Firestore data with local data
+        setCombinedProducts(allProducts);                                        // Update the combined products state
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        setLoadingProducts(false); // Reset loading state
+        setLoadingProducts(false);  // Reset loading state
       }
     };
 
-    fetchProducts(); // Call the function to fetch products
+    fetchProducts();  // Call the function to fetch products
   }, [getProducts]);
 
-  // Calculate total amount from cartItems and combinedProducts
+      // Calculate total amount from cartItems and combinedProducts
   const calculateTotalAmount = () => {
     return combinedProducts.reduce((total, product) => {
       const quantity = cartItems[product.id];
@@ -219,14 +217,15 @@ export default function Cart() {
     }, 0);
   };
 
-  const subtotal = calculateTotalAmount(); // Calculate subtotal
-  const deliveryFee = subtotal === 0 ? 0 : 2; // Delivery fee
-  const total = subtotal + deliveryFee; // Calculate total
+  const subtotal    = calculateTotalAmount();  // Calculate subtotal
+  const deliveryFee = subtotal === 0 ? 0 : 2;  // Delivery fee
+  const total       = subtotal + deliveryFee;  // Calculate total
 
+  console.log(cartItems);
   return (
-    <div className='cart'>
-      <div className="cart-items">
-        <div className="cart-items-title">
+    <div className = 'cart'>
+    <div className = "cart-items">
+    <div className = "cart-items-title">
           <p>Items</p>
           <p>Title</p>
           <p>Price</p>
@@ -242,49 +241,49 @@ export default function Cart() {
           combinedProducts.map((food) => {
             if (cartItems[food.id] > 0) {
               return (
-                <div className="cart-items-title cart-items-item" key={food.id}>
-                  <img src={food.image} alt={food.name} />
+                <div className = "cart-items-title cart-items-item" key = {food.id}>
+                <img src       = {food.image} alt                       = {food.name} />
                   <p>{food.name}</p>
                   <p>${food.price}</p>
                   <p>{cartItems[food.id]}</p>
                   <p>${food.price * cartItems[food.id]}</p>
-                  <button className='cross' onClick={() => removeFromCart(food.id)}>X</button>
+                  <button className = 'cross' onClick = {() => removeFromCart(food.id)}>X</button>
                   <hr />
                 </div>
               );
             }
-            return null; // Return null for items not in the cart
+            return null;  // Return null for items not in the cart
           })
         )}
       </div>
-      <div className="cart-bottom">
-        <div className="cart-total">
+      <div className = "cart-bottom">
+      <div className = "cart-total">
           <h2>Cart Totals</h2>
           <div>
-            <div className="cart-total-details">
+            <div className = "cart-total-details">
               <p>Subtotal</p>
               <p>${subtotal}</p>
             </div>
             <hr />
-            <div className="cart-total-details">
+            <div className = "cart-total-details">
               <p>Delivery Fee</p>
               <p>${deliveryFee}</p>
             </div>
             <hr />
-            <div className="cart-total-details">
+            <div className = "cart-total-details">
               <b>Total</b>
               <b>${total}</b>
             </div>
           </div>
-          <button onClick={handleSubmit}>
+          <button onClick = {handleSubmit}>
             {loading ? "Loading..." : 'PROCEED TO CHECKOUT'}
           </button>
         </div>
-        <div className="cart-promo-code">
+        <div className = "cart-promo-code">
           <div>
             <p>If you have a promo code, enter it here</p>
-            <div className='cart-promo-code-input'>
-              <input type="text" placeholder='Promo Code' />
+            <div   className = 'cart-promo-code-input'>
+            <input type      = "text" placeholder = 'Promo Code' />
               <button>Apply</button>
             </div>
           </div>

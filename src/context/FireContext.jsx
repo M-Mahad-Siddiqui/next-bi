@@ -246,47 +246,123 @@ export const FireProvider = ({ children }) => {
 
 
     const getCategories = async () => {
-    try {
-        setLoading(true);
-        const querySnapshot = await getDocs(collection(db, "categories")); // Fetch from the "categories" collection
-        const categories = [];
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            categories.push({ name: data.name, image: data.image }); // Store name and image
-        });
-        return categories; // Return array of objects with name and image
-    } catch (error) {
-        console.error("Error fetching categories:", error);
-        throw error;
-    } finally {
-        setLoading(false);
-    }
-};
-
-const addCategory = async (data) => {
-    try {
-        setLoading(true);
-        if (data.image) {
-            data.image = await addImage(data.image); // Upload image and get URL
+        try {
+            setLoading(true);
+            const querySnapshot = await getDocs(collection(db, "categories")); // Fetch from the "categories" collection
+            const categories = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                categories.push({ name: data.name, image: data.image }); // Store name and image
+            });
+            return categories; // Return array of objects with name and image
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+            throw error;
+        } finally {
+            setLoading(false);
         }
-        await addDataToCollection("categories", { name: data.name, image: data.image }); // Add name and image to "categories" collection
+    };
+
+    const addCategory = async (data) => {
+        try {
+            setLoading(true);
+            if (data.image) {
+                data.image = await addImage(data.image); // Upload image and get URL
+            }
+            await addDataToCollection("categories", data); // Add name and image to "categories" collection
+        } catch (error) {
+            console.error("Error adding category:", error);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // const addOrder = async (data) => {
+    //      try {
+    //     setLoading(true);
+    //     if (data.image) {
+    //         data.image = await addImage(data.image); // Upload image and get URL
+    //     }
+    //     await addDataToCollection("CustomerOrder", { name: data.name, image: data.image }); // Add name and image to "categories" collection
+    // } catch (error) {
+    //     console.error("Error adding category:", error);
+    //     throw error;
+    // } finally {
+    //     setLoading(false);
+    // }
+    // }
+//   const addOrder = async (data) => {
+//     try {
+//         setLoading(true);
+
+//         // Create the orderData object by spreading all properties from data
+//         const orderData = {
+//             ...data,              // Spread all properties from data
+//             image: data.image || null, // Ensure the image is optional
+//         };
+
+//         // You can log the orderData to check its structure before saving
+//         console.log("Order Data to save:", orderData);
+
+//         // Save the orderData to Firestore
+//         await addDataToCollection("CustomerOrder", orderData);  // Ensure orderData is an object
+//         console.log("Order added successfully");
+//     } catch (error) {
+//         console.error("Error adding data to CustomerOrder:", error);
+//         throw error;
+//     } finally {
+//         setLoading(false);
+//     }
+// };
+
+
+    const addOrder = async (data) => {
+    try {
+        setLoading(true);
+
+        // Create the orderData object by spreading all properties from data
+        const orderData = {
+            ...data,              // Spread all properties from data
+            image: data.image || null, // Ensure the image is optional
+            // Include firstName and lastName in orderData
+            firstName: data.firstName,
+            lastName : data.lastName
+        };
+
+        // Log the orderData to check its structure before saving
+        console.log("Order Data to save:", orderData);
+
+        // Save the orderData to Firestore
+        await addDataToCollection("CustomerOrder", orderData);  // Ensure orderData is an object
+        console.log("Order added successfully");
     } catch (error) {
-        console.error("Error adding category:", error);
+        console.error("Error adding data to CustomerOrder:", error);
         throw error;
     } finally {
         setLoading(false);
     }
 };
+ const updateOrderStatus = async (orderId, newStatus) => {
+    try {
+      const orderRef = doc(db, 'CustomerOrder', orderId); // Reference to the order document
+      await updateDoc(orderRef, { status: newStatus });  // Update the status field in Firestore
+      console.log(`Order status updated to ${newStatus} for order ${orderId}`);
+    } catch (error) {
+      console.error('Error updating order status:', error);
+      throw error;
+    }
+  };
 
 
     const addUserInfo = (data) => addDataToCollection("usersDetails", data);
-    const addOrder    = (data) => addDataToCollection("orders", data);
+    // const addOrder    = (data) => addDataToCollection("orders", data);
     const addCart = (data) => addDataToCollection("cart", data);
 
     const getUserInfo = () => getDataFromCollection("usersDetails");
-      // const getProducts = () => getDataFromCollection("products");
+    // const getProducts = () => getDataFromCollection("products");
     const getProducts = useCallback(() => getDataFromCollection("products"), []);
-    const getOrders   = () => getDataFromCollection("orders");
+    const getOrders   = () => getDataFromCollection("CustomerOrder");
     const getCart     = () => getDataFromCollection("cart");
 
     const fireContextValue = {
@@ -296,6 +372,7 @@ const addCategory = async (data) => {
         SignUp,
         SignIn,
         SignOut,
+        updateOrderStatus,
         addCategory,
         getCategories,
         deleteProduct,
