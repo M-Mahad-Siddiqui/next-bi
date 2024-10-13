@@ -294,7 +294,7 @@ export default function ViewOrder() {
             <p><strong>Zip Code:</strong> {selectedOrder.zipCode}</p>
             <p><strong>Country:</strong> {selectedOrder.country}</p>
             <p><strong>Phone:</strong> {selectedOrder.phone}</p>
-            <button className="close-btn" onClick={closeModal}>Close</button>
+            <button className = "close-btn" onClick = {closeModal}>X</button>
           </div>
         </div>
       )}

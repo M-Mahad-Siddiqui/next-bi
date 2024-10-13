@@ -115,14 +115,13 @@ select:focus {
 
 /* Close button for modal */
 .close-btn {
-  background-color: #dc3545;   /* Close button color */
+  background-color: #dc3545;   
   color           : white;
   border          : none;
   padding         : 5px 10px;
   cursor          : pointer;
   border-radius   : 5px;
   font-size       : larger;
-  width           : 50%;
   margin-top: 10px;
 }
 

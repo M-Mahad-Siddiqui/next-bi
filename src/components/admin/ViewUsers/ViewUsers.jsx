@@ -32,10 +32,10 @@ function ViewUsers() {
 				<p>Email Address</p>
 				<p>Street</p>
 				<p>City</p>
-				<p>State</p>
-				<p>Zip Code</p>
-				<p>Country</p>
 				<p>Phone</p>
+				<p>Zip Code</p>
+				<p>State</p>
+				<p>Country</p>
 			</div>
 			<br />
 			<hr />
@@ -49,10 +49,10 @@ function ViewUsers() {
 							<p>{user.email}</p>
 							<p>{user.street}</p>
 							<p>{user.city}</p>
-							<p>{user.state}</p>
-							<p>{user.zipCode}</p>
-							<p>{user.country}</p>
 							<p>{user.phone}</p>
+							<p>{user.zipCode}</p>
+							<p>{user.state}</p>
+							<p>{user.country}</p>
 						</div>
 						<hr />
 					</>
