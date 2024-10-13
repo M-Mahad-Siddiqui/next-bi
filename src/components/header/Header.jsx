@@ -14,16 +14,26 @@ function Header() {
     const images = [img, img1, food, img2, de, img4, img5];
     const randomImage = images[Math.floor(Math.random() * images.length)];
 
-    const styles = {
-        height        : '34vw',
-        margin        : '30px auto',
-        background    : ` url(${randomImage}) no-repeat`,
-        backgroundSize: 'cover',
-        width         : "80vw",
-        position      : 'relative',
-        borderRadius  : '15px'
+    // const styles = {
+    //     height        : '34vw',
+    //     margin        : '30px auto',
+    //     background    : ` url(${randomImage}) no-repeat`,
+    //     backgroundSize: 'cover',
+    //     width         : "80vw",
+    //     position      : 'relative',
+    //     borderRadius  : '15px'
 
-    };
+    // };
+const styles = {
+    height: '34vw',
+    margin: '30px auto',
+    backgroundImage: `url(${randomImage})`,  // Set background image
+    backgroundRepeat: 'no-repeat',           // Define repeat behavior
+    backgroundSize: 'cover',                 // Set size explicitly
+    width: "80vw",
+    position: 'relative',
+    borderRadius: '15px'
+};
 
     return (
         <div style={styles} className='header'>

@@ -56,9 +56,9 @@ const Modal = ({ isOpen, onClose, product, onUpdate }) => {
             placeholder = "Product Category"
             required
           />
-          <button type = "submit">Update</button>
+        <button type    = "submit">Update</button>
         </form>
-        <button onClick = {onClose}>Close</button>
+        <button id = 'close' onClick = {onClose}>X</button>
       </div>
     </div>
   );

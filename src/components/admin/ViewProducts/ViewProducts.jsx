@@ -79,6 +79,7 @@
 
 // export default ViewProducts;
 
+
 import { useEffect, useState } from "react";
 import { useFireContext } from "../../../context/FireContext";
 import Modal from "./Modal"; // Import the Modal component
@@ -101,7 +102,7 @@ function ViewProducts() {
     };
 
     fetchProducts();
-  }, [getProducts]);
+  }, [getProducts,deleteProduct]);
 
   const handleUpdateProduct = async (updatedProduct) => {
     await updateProduct(updatedProduct.id, updatedProduct);

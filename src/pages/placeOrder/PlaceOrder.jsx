@@ -254,8 +254,8 @@ import { useStoreContext } from "../../context/StoreContext";
 import "./placeOrder.css";
 
 export default function PlaceOrder() {
-  const { getTotalCartAmount, cartItems } = useStoreContext();
-  const { addUserInfo, loading, getProducts, addOrder } = useFireContext();
+  const { getTotalCartAmount, cartItems, setCartItems } = useStoreContext();
+  const { addUserInfo, loading, getProducts, addOrder,user } = useFireContext();
 
   const [combinedProducts, setCombinedProducts] = useState([]);  // Combined product list state
   const [loadingProducts, setLoadingProducts] = useState(true);  // Loading state for products
@@ -307,12 +307,15 @@ export default function PlaceOrder() {
       zipCode  : formData.get("zipCode"),
       country  : formData.get("country"),
       phone    : formData.get("phone"),
-      selectedItems: selectedItems, // Include selected items in the data
+      selectedItems: selectedItems // Include selected items in the data
     };
 
-    addOrder(data);  // Send data including user info and selected items
-    addUserInfo(data);  // Optionally, send user info separately if needed
-    e.target.reset();  // Reset the form fields after submission
+    addOrder      (data);  // Send data including user info and selected items
+    addUserInfo   (data);  // Optionally, send user info separately if needed
+    e.target.reset();      // Reset the form fields after submission
+    alert("Order placed successfully");
+    setCartItems({});
+
   };
 
   return (
@@ -323,11 +326,11 @@ export default function PlaceOrder() {
           <input name="firstName" type="text" placeholder="First Name" required />
           <input name="lastName" type="text" placeholder="Last Name" required />
         </div>
-        <input name="email" type="email" placeholder="Email Address" required />
-        <input name="street" type="text" placeholder="Street" required />
-        <div className="multi-fields">
-          <input name="city" type="text" placeholder="City" required />
-          <input name="state" type="text" placeholder="State" required />
+        <input name      = "email" type  = "email" value      = {user ? user.email : ""} placeholder = {user ? user.email : "Email Address enter"}  required />
+        <input name      = "street" type = "text" placeholder = "Street" required />
+        <div   className = "multi-fields">
+        <input name      = "city" type   = "text" placeholder = "City" required />
+        <input name      = "state" type  = "text" placeholder = "State" required />
         </div>
         <div className="multi-fields">
           <input name="zipCode" type="text" placeholder="Zip Code" required />

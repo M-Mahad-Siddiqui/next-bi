@@ -108,7 +108,7 @@
 
 
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -292,68 +292,117 @@ export const FireProvider = ({ children }) => {
     //     setLoading(false);
     // }
     // }
-//   const addOrder = async (data) => {
-//     try {
-//         setLoading(true);
+    //   const addOrder = async (data) => {
+    //     try {
+    //         setLoading(true);
 
-//         // Create the orderData object by spreading all properties from data
-//         const orderData = {
-//             ...data,              // Spread all properties from data
-//             image: data.image || null, // Ensure the image is optional
-//         };
+    //         // Create the orderData object by spreading all properties from data
+    //         const orderData = {
+    //             ...data,              // Spread all properties from data
+    //             image: data.image || null, // Ensure the image is optional
+    //         };
 
-//         // You can log the orderData to check its structure before saving
-//         console.log("Order Data to save:", orderData);
+    //         // You can log the orderData to check its structure before saving
+    //         console.log("Order Data to save:", orderData);
 
-//         // Save the orderData to Firestore
-//         await addDataToCollection("CustomerOrder", orderData);  // Ensure orderData is an object
-//         console.log("Order added successfully");
-//     } catch (error) {
-//         console.error("Error adding data to CustomerOrder:", error);
-//         throw error;
-//     } finally {
-//         setLoading(false);
-//     }
-// };
+    //         // Save the orderData to Firestore
+    //         await addDataToCollection("CustomerOrder", orderData);  // Ensure orderData is an object
+    //         console.log("Order added successfully");
+    //     } catch (error) {
+    //         console.error("Error adding data to CustomerOrder:", error);
+    //         throw error;
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
 
     const addOrder = async (data) => {
+        try {
+            setLoading(true);
+
+            // Create the orderData object by spreading all properties from data
+            const orderData = {
+                ...data,              // Spread all properties from data
+                image: data.image || null, // Ensure the image is optional
+                // Include firstName and lastName in orderData
+                firstName: data.firstName,
+                lastName: data.lastName
+            };
+
+            // Log the orderData to check its structure before saving
+            console.log("Order Data to save:", orderData);
+
+            // Save the orderData to Firestore
+            await addDataToCollection("CustomerOrder", orderData);  // Ensure orderData is an object
+            console.log("Order added successfully");
+        } catch (error) {
+            console.error("Error adding data to CustomerOrder:", error);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+    const updateOrderStatus = async (orderId, newStatus) => {
+        try {
+            const orderRef = doc(db, 'CustomerOrder', orderId); // Reference to the order document
+            await updateDoc(orderRef, { status: newStatus });  // Update the status field in Firestore
+            console.log(`Order status updated to ${newStatus} for order ${orderId}`);
+        } catch (error) {
+            console.error('Error updating order status:', error);
+            throw error;
+        }
+    };
+
+    const getOrders = () => getDataFromCollection("CustomerOrder");
+    // const updateOrderStatus = async (orderId, newStatus) => {
+    //     try {
+    //         const orderRef = doc(db, 'CustomerOrder', orderId); // Reference to the order document
+    //         await updateDoc(orderRef, { status: newStatus });  // Update the status field in Firestore
+    //         console.log(Order status updated to ${ newStatus } for order ${ orderId });
+    //     } catch (error) {
+    //         console.error('Error updating order status:', error);
+    //         throw error;
+    //     }
+    // };
+    // const getCurrentStatus = async (orderId) => {
+    //     try {
+    //         const orderRef = doc(db, 'CustomerOrder', orderId);
+    //         const orderSnapshot = await getDoc(orderRef);
+
+    //         if (orderSnapshot.exists()) {
+    //             const orderData = orderSnapshot.data();
+    //             console.log(Order ID: ${ orderId }, Status: ${ orderData.status }); // Check if status is present
+    //             return orderData.status;
+    //         } else {
+    //             console.error(Order with ID ${ orderId } does not exist.);
+    //             return null; // or a default status
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching order status:', error);
+    //         throw error;
+    //     }
+    // };
+
+
+const getCurrentStatus = async (orderId) => {
     try {
-        setLoading(true);
-
-        // Create the orderData object by spreading all properties from data
-        const orderData = {
-            ...data,              // Spread all properties from data
-            image: data.image || null, // Ensure the image is optional
-            // Include firstName and lastName in orderData
-            firstName: data.firstName,
-            lastName : data.lastName
-        };
-
-        // Log the orderData to check its structure before saving
-        console.log("Order Data to save:", orderData);
-
-        // Save the orderData to Firestore
-        await addDataToCollection("CustomerOrder", orderData);  // Ensure orderData is an object
-        console.log("Order added successfully");
+        const orderRef = doc(db, 'CustomerOrder', orderId);
+        const orderSnapshot = await getDoc(orderRef);
+        
+        if (orderSnapshot.exists()) {
+            const orderData = orderSnapshot.data();
+            console.log(`Order ID: ${orderId}, Status: ${orderData.status}`); // Check if status is present
+            return orderData.status;
+        } else {
+            console.error(`Order with ID ${orderId} does not exist.`);
+            return null; // or a default status
+        }
     } catch (error) {
-        console.error("Error adding data to CustomerOrder:", error);
+        console.error('Error fetching order status:', error);
         throw error;
-    } finally {
-        setLoading(false);
     }
 };
- const updateOrderStatus = async (orderId, newStatus) => {
-    try {
-      const orderRef = doc(db, 'CustomerOrder', orderId); // Reference to the order document
-      await updateDoc(orderRef, { status: newStatus });  // Update the status field in Firestore
-      console.log(`Order status updated to ${newStatus} for order ${orderId}`);
-    } catch (error) {
-      console.error('Error updating order status:', error);
-      throw error;
-    }
-  };
-
 
     const addUserInfo = (data) => addDataToCollection("usersDetails", data);
     // const addOrder    = (data) => addDataToCollection("orders", data);
@@ -362,8 +411,8 @@ export const FireProvider = ({ children }) => {
     const getUserInfo = () => getDataFromCollection("usersDetails");
     // const getProducts = () => getDataFromCollection("products");
     const getProducts = useCallback(() => getDataFromCollection("products"), []);
-    const getOrders   = () => getDataFromCollection("CustomerOrder");
-    const getCart     = () => getDataFromCollection("cart");
+    // const getOrders   = () => getDataFromCollection("CustomerOrder");
+    const getCart = () => getDataFromCollection("cart");
 
     const fireContextValue = {
         isLogin,
@@ -373,6 +422,7 @@ export const FireProvider = ({ children }) => {
         SignIn,
         SignOut,
         updateOrderStatus,
+        getCurrentStatus,
         addCategory,
         getCategories,
         deleteProduct,
