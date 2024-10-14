@@ -435,12 +435,10 @@
 
 // export default AddProduct;
 
-
-
 import { useEffect, useState } from 'react';
+import { menu_list } from '../../../assets/assets';
 import { useFireContext } from '../../../context/FireContext.jsx';
 import './AddProduct.css';
-import { menu_list } from '../../../assets/assets';
 
 function AddProduct() {
   const [productName, setProductName] = useState('');
@@ -450,7 +448,7 @@ function AddProduct() {
   const [newCategory, setNewCategory] = useState('');
   const [image, setImage] = useState(null);
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(''); // Empty or 'product' or 'category'
   const [error, setError] = useState('');
 
   const { addProducts, getCategories, addCategory } = useFireContext();
@@ -481,10 +479,10 @@ function AddProduct() {
       description,
       price,
       category: newCategory || category,
-      image,
+      image
     };
 
-    setLoading(true);
+    setLoading('product');
     try {
       await addProducts(productData);
       console.log('Product submitted:', productData);
@@ -493,7 +491,7 @@ function AddProduct() {
       console.error("Error adding product:", error);
       setError("Error adding product. Please try again.");
     } finally {
-      setLoading(false);
+      setLoading(''); // Reset loading after operation
     }
   };
 
@@ -521,7 +519,7 @@ function AddProduct() {
       return;
     }
 
-    setLoading(true);
+    setLoading('category');
     try {
       const categoryData = { name: newCategory, image };
       await addCategory(categoryData);
@@ -532,7 +530,7 @@ function AddProduct() {
       console.error('Error adding category:', error);
       setError('Error adding category. Please try again.');
     } finally {
-      setLoading(false);
+      setLoading(''); // Reset loading after operation
     }
   };
 
@@ -607,8 +605,8 @@ function AddProduct() {
               accept="image/*"
               onChange={handleImageChange}
             />
-            <button type="button" onClick={handleAddCategory} disabled={loading}>
-              {loading ? 'Adding...' : 'Add Category'}
+            <button type="button" onClick={handleAddCategory} disabled={loading === 'category'}>
+              {loading === 'category' ? 'Adding...' : 'Add Category'}
             </button>
           </div>
         </div>
@@ -619,10 +617,11 @@ function AddProduct() {
             id="image"
             accept="image/*"
             onChange={handleImageChange}
+            required
           />
         </div>
-        <button type="submit" className="submit-button" disabled={loading}>
-          {loading ? 'Adding...' : 'Add Product'}
+        <button type="submit" className="submit-button" disabled={loading === 'product'}>
+          {loading === 'product' ? 'Adding...' : 'Add Product'}
         </button>
       </form>
     </div>
